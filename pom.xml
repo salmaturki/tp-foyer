@@ -10,7 +10,7 @@
     </parent>
     <groupId>tn.esprit</groupId>
     <artifactId>tp-foyer</artifactId>
-    <version>5.0.0</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>tp-foyer</name>
     <description>tp-foyer</description>
     <properties>
@@ -83,12 +83,12 @@
         <repository>
             <id>nexus</id>
             <name>Releases</name>
-            <url>http://192.168.50.4:8081/repository/maven-releases/</url>
+            <url>http://localhost:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>nexus</id>
             <name>Snapshot</name>
-            <url>http://192.168.50.4:8081/repository/maven-snapshots/</url>
+            <url>http://localhost:8081/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
