@@ -6,15 +6,8 @@ services:
       - "8089:8089"
     env_file:
       - app.env
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8089/tpfoyer/actuator/health" ]
-      interval: 30s
-      retries: 3
-      start_period: 10s
-      timeout: 5s
     depends_on:
-      db:
-        condition: service_healthy
+      - db
 
   db:
     image: mysql:8.0.38
@@ -22,16 +15,10 @@ services:
     container_name: db
     volumes:
       - devops_db_data:/var/lib/mysql
-      - ./config.my-cnf:/cfg/config.my-cnf
     env_file:
       - db.env
     expose:
       - 3306
-    healthcheck:
-      test: ["CMD-SHELL", "mysqladmin -u $$MYSQL_USER -p$$MYSQL_PASSWORD ping -h localhost || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   exporter:
     image: prom/mysqld-exporter
@@ -44,6 +31,7 @@ services:
       - --config.my-cnf=/cfg/config.my-cnf
     depends_on:
       - db
+
   grafana:
     image: grafana/grafana
     container_name: grafana
