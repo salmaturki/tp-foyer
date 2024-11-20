@@ -44,5 +44,21 @@ services:
       - --config.my-cnf=/cfg/config.my-cnf
     depends_on:
       - db
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    restart: always
+
+  prometheus:
+    iamge: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    restart: always
+
 volumes:
   devops_db_data:
